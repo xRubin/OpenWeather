@@ -1,4 +1,4 @@
-# OpenSky REST API
+# OpenWeather REST API
 
 [![Build Status](https://github.com/xRubin/OpenWeather/workflows/CI/badge.svg)](https://github.com/xRubin/OpenWeather/actions)
 [![Latest Stable Version](http://poser.pugx.org/rubin/openweather/v)](https://packagist.org/packages/rubin/openweather)
@@ -19,7 +19,7 @@ composer require rubin/openweather
 
 Create API connector:
 ```php
-$openWeatherApi = new \OpenSky\OpenWeather('{key}');
+$openWeatherApi = new \OpenWeather\OpenWeather('{key}');
 ```
 
 Set language (optional):
