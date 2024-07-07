@@ -37,7 +37,7 @@ $openWeatherApi = new \OpenWeather\OpenWeatherApi('{key}');
 echo implode(
     ', ',
     array_map(
-        fn(\OpenWeather\Weather $weather) => $weather->main,
+        fn(\OpenWeather\Weather $weather) => $weather->description,
         $openWeatherApi->getCurrentWeather(new \OpenWeather\GeoCoordinates(lon: 37.36, lat: 55.45))->weather)
 ) . PHP_EOL;
 ```

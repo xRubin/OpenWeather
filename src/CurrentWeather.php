@@ -7,10 +7,15 @@ class CurrentWeather
     /**
      * @param GeoCoordinates $coord
      * @param Weather[] $weather
-     * @param string $base
+     * @param string $base Internal parameter
      * @param MainWeather $main
-     * @param int $visibility
+     * @param int $visibility Visibility, meter. The maximum value of the visibility is 10 km
      * @param Wind $wind
+     * @param Clouds $clouds
+     * @param \DateTimeInterface $dt Time of data calculation, unix, UTC
+     * @param int $timezone Shift in seconds from UTC
+     * @param Rain|null $rain
+     * @param Snow|null $snow
      */
     public function __construct(
         public GeoCoordinates $coord,

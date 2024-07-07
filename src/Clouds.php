@@ -4,6 +4,9 @@ namespace OpenWeather;
 
 class Clouds
 {
+    /**
+     * @param int $all Cloudiness, %
+     */
     public function __construct(
         public int $all
     )

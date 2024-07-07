@@ -12,7 +12,9 @@ class OpenWeatherApi
     private ?ClientInterface $client = null;
 
     /**
-     * @param string $appId
+     * @param string $appId Your unique API key (you can always find it on your account page under the "API key" tab)
+     * @param string $units Units of measurement. standard, metric and imperial units are available.
+     * @param string $language You can use this parameter to get the output in your language.
      */
     public function __construct(
         private readonly string $appId,
