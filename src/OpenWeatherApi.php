@@ -85,8 +85,10 @@ class OpenWeatherApi
                 CurrentWeather::class,
                 Source::json((string)$response->getBody())
                     ->map([
-                        '1h' => 'h1',
-                        '3h' => 'h3',
+                        'rain.1h' => 'h1',
+                        'rain.3h' => 'h3',
+                        'snow.1h' => 'h1',
+                        'snow.3h' => 'h3',
                     ])
             );
     }

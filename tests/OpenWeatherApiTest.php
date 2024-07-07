@@ -73,7 +73,7 @@ final class OpenWeatherApiTest extends TestCase
         $response = $openWeatherApi->getCurrentWeather(new GeoCoordinates(lon: 147.794, lat: -31.358));
         $this->assertInstanceOf(CurrentWeather::class, $response);
         $this->assertInstanceOf(Rain::class, $response->rain);
-        $this->assertEquals(0.69, $response->snow->h1);
+        $this->assertEquals(0.69, $response->rain->h1);
     }
 
     public function testCanParseCurrentWeatherSnow()
