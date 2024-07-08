@@ -92,4 +92,32 @@ class OpenWeatherApi
                     ])
             );
     }
+
+    public function getForecast(GeoCoordinates $coordinates, ?int $cnt = null): Forecast
+    {
+        $response = $this->getClient()->request('GET', '/data/2.5/forecast', [
+            'query' => [
+                'lat' => $coordinates->lat,
+                'lon' => $coordinates->lon,
+                'appid' => $this->appId,
+                'units' => $this->getUnits(),
+                'cnt' => $cnt,
+                'lang' => $this->getLanguage(),
+            ],
+        ]);
+
+        return (new MapperBuilder())
+            ->allowSuperfluousKeys()
+            ->mapper()
+            ->map(
+                Forecast::class,
+                Source::json((string)$response->getBody())
+                    ->map([
+                        'items.*.rain.1h' => 'h1',
+                        'items.*.rain.3h' => 'h3',
+                        'items.*.snow.1h' => 'h1',
+                        'items.*.snow.3h' => 'h3',
+                    ])
+            );
+    }
 }

@@ -29,15 +29,46 @@ $openWeatherApi->setLanguage('ru');
 
 ## Examples
 
-Example query to get current weather:
+Example script to get current weather:
 
 ```php
 $openWeatherApi = new \OpenWeather\OpenWeatherApi('{key}');
+$output = new \Symfony\Component\Console\Output\StreamOutput(fopen('php://stdout', 'w'));
+$table = new \Symfony\Component\Console\Helper\Table($output);
 
-echo implode(
-    ', ',
-    array_map(
-        fn(\OpenWeather\Weather $weather) => $weather->description,
-        $openWeatherApi->getCurrentWeather(new \OpenWeather\GeoCoordinates(lon: 37.36, lat: 55.45))->weather)
-) . PHP_EOL;
+$table
+    ->setHeaders(['Latitude', 'Longitude', 'Temperature', 'Weather'])
+    ->setRows(array_map(function (\OpenWeather\GeoCoordinates $coordinates) use ($openWeatherApi) {
+        $current = $openWeatherApi->getCurrentWeather($coordinates);
+        return [
+            $coordinates->lat,
+            $coordinates->lon,
+            $current->main->temp,
+            $current->weather[0]->description
+        ];
+    }, [
+        new \OpenWeather\GeoCoordinates(lon: 37.36, lat: 55.45),
+        new \OpenWeather\GeoCoordinates(lon: -66.159, lat: -68.2008),
+        new \OpenWeather\GeoCoordinates(lon: 147.794, lat: -31.358)
+    ]));
+    
+$table->render();
+```
+
+Example script to get 5 days forecast:
+```php
+$openWeatherApi = new \OpenWeather\OpenWeatherApi('{key}');
+$output = new \Symfony\Component\Console\Output\StreamOutput(fopen('php://stdout', 'w'));
+$table = new \Symfony\Component\Console\Helper\Table($output);
+
+$table
+    ->setHeaders(['DateTime', 'Temperature', 'PoP', 'Weather'])
+    ->setRows(array_map(fn(\OpenWeather\ForecastItem $item) => [
+        $item->dt->format('Y-m-d H:i:s'),
+        $item->main->temp,
+        $item->pop,
+        $item->weather[0]->description,
+    ], $openWeatherApi->getForecast(new \OpenWeather\GeoCoordinates(lon: -66.159, lat: -68.2008))->list));
+    
+$table->render();
 ```

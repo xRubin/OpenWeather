@@ -15,7 +15,7 @@ use OpenWeather\Snow;
 use OpenWeather\Weather;
 use PHPUnit\Framework\TestCase;
 
-final class OpenWeatherApiTest extends TestCase
+final class CurrentWeatherTest extends TestCase
 {
     public function testCanParseCurrentWeather()
     {
