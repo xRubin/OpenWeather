@@ -19,7 +19,7 @@ composer require rubin/openweather
 
 Create API connector:
 ```php
-$openWeatherApi = new \OpenWeather\OpenWeather('{key}');
+$openWeatherApi = new \OpenWeather\OpenWeatherApi('{key}');
 ```
 
 Set language (optional):
