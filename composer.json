@@ -22,9 +22,13 @@
     "php-coveralls/php-coveralls": "^2.7",
     "phpunit/phpunit": "^10.5"
   },
+  "autoload": {
+    "psr-4": {
+      "OpenWeather\\": "src/"
+    }
+  },
   "autoload-dev": {
     "psr-4": {
-      "OpenWeather\\": "src/",
       "tests\\": "tests/"
     }
   },
