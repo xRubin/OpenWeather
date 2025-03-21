@@ -21,8 +21,8 @@ class ForecastItem
         public array              $weather,
         public Clouds             $clouds,
         public Wind               $wind,
-        public int                $visibility,
-        public float              $pop,
+        public int                $visibility = 0,
+        public float              $pop = 0,
         public ?Rain              $rain = null,
         public ?Snow              $snow = null,
     )
